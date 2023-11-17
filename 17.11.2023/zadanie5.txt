@@ -1,0 +1,4 @@
+Switch jest lepszy poniewaz:
+-nie trzeba w kolko powtarzacz warunku
+- kod jest bardziej czytelny dla ludzi z zewnatrz
+-kod bedzie wydajnieszy i zajmowal mniej miejsca.
