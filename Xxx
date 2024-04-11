@@ -1,0 +1,107 @@
+using System;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace EmployeeManagementApp
+{
+    public partial class AddEmployeeForm : Form
+    {
+        private string generatedPassword = "";
+
+        public AddEmployeeForm()
+        {
+            InitializeComponent();
+            SetupControls();
+        }
+
+        private void SetupControls()
+        {
+            positionCombo.Items.AddRange(new object[] { "Kierownik", "Starszy programista", "Młodszy programista", "Tester" });
+            lowercaseAndUppercaseCharsCheckbox.Checked = true;
+        }
+
+        private void ShowPasswordMessageBox()
+        {
+            MessageBox.Show(generatedPassword, "", MessageBoxButtons.OK);
+        }
+
+        private void NotEnoughCharsMessageBox()
+        {
+            MessageBox.Show("Wprowadzona liczba znaków hasła jest zbyt mała, aby dodać do niej wybrane znaki. Odznacz część dodatkowych grup znaków.", "Błąd przy generowaniu hasła", MessageBoxButtons.OK);
+        }
+
+        private void ApplyMessageBox()
+        {
+            MessageBox.Show($"Dane pracownika: {nameInput.Text} {surnameInput.Text} {positionCombo.SelectedItem} Hasło: {generatedPassword}", "", MessageBoxButtons.OK);
+        }
+
+        private void GeneratePassword()
+        {
+            int passwordLength = int.Parse(characterNumberInput.Text);
+            bool includeLowercaseAndUppercase = lowercaseAndUppercaseCharsCheckbox.Checked;
+            bool includeDigits = digitsCheckbox.Checked;
+            bool includeSpecialCharacters = specialCharactersCheckbox.Checked;
+
+            string lowercaseCharacterSet = "abcdefghijklmnopqrstuvwxyz";
+            string uppercaseCharacterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string digitsCharacterSet = "0123456789";
+            string specialCharactersSet = "!@#$%^&*()_+-=";
+
+            StringBuilder generatedPasswordBuilder = new StringBuilder();
+
+            Random random = new Random();
+
+            for (int i = 0; i < passwordLength; i++)
+            {
+                generatedPasswordBuilder.Append(lowercaseCharacterSet[random.Next(lowercaseCharacterSet.Length)]);
+            }
+
+            int requiredNumberOfChars = (includeLowercaseAndUppercase ? 1 : 0)
+                                        + (includeDigits ? 1 : 0)
+                                        + (includeSpecialCharacters ? 1 : 0);
+
+            if (requiredNumberOfChars > passwordLength)
+            {
+                NotEnoughCharsMessageBox();
+            }
+            else
+            {
+                char[] generatedPasswordChars = generatedPasswordBuilder.ToString().ToCharArray();
+                int[] blockedPasswordCharacterIndexes = new int[3] { -1, -1, -1 };
+
+                SetRandomCharacter(generatedPasswordChars, passwordLength, blockedPasswordCharacterIndexes, includeLowercaseAndUppercase, uppercaseCharacterSet, random);
+                SetRandomCharacter(generatedPasswordChars, passwordLength, blockedPasswordCharacterIndexes, includeDigits, digitsCharacterSet, random);
+                SetRandomCharacter(generatedPasswordChars, passwordLength, blockedPasswordCharacterIndexes, includeSpecialCharacters, specialCharactersSet, random);
+
+                generatedPassword = new string(generatedPasswordChars);
+                ShowPasswordMessageBox();
+            }
+        }
+
+        private void SetRandomCharacter(char[] passwordChars, int passwordLength, int[] blockedIndexes, bool includeCharacter, string characterSet, Random random)
+        {
+            if (includeCharacter)
+            {
+                int randomIndex;
+                do
+                {
+                    randomIndex = random.Next(passwordLength);
+                } while (blockedIndexes.Contains(randomIndex));
+
+                passwordChars[randomIndex] = characterSet[random.Next(characterSet.Length)];
+                blockedIndexes[Array.IndexOf(blockedIndexes, -1)] = randomIndex;
+            }
+        }
+
+        private void ApplyButton_Click(object sender, EventArgs e)
+        {
+            ApplyMessageBox();
+        }
+
+        private void GeneratePasswordButton_Click(object sender, EventArgs e)
+        {
+            GeneratePassword();
+        }
+    }
+}
