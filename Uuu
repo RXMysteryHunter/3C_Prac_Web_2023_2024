@@ -1,195 +1,54 @@
 namespace spreadsheet_info_04_2023
 {
-    partial class Form1
+    public partial class Form1 : Form
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        public Form1()
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
+            InitializeComponent();
         }
 
-        #region Windows Form Designer generated code
+        string password = "";
+        string uppercase_letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
+        string lowercase_letters = "qwertyuiopasdfghjklzxcvbnm";
+        string special_characters = "!@#$%^&*()_+-=";
+        string numbers = "1234567890";
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
+        Random random = new Random();
+
+
+        private void generatePassword_button_Click(object sender, EventArgs e)
         {
-            groupBox1 = new GroupBox();
-            position_comboBox = new ComboBox();
-            lastName_textbox = new TextBox();
-            firstName_textbox = new TextBox();
-            Position = new Label();
-            lastName = new Label();
-            firstName = new Label();
-            groupBox2 = new GroupBox();
-            generatePassword_button = new Button();
-            length_textBox = new TextBox();
-            specialCharacters_checkBox = new CheckBox();
-            numbers_checkBox = new CheckBox();
-            letters_checkBox = new CheckBox();
-            charactersLabel = new Label();
-            confirm_button = new Button();
-            groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
-            SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(position_comboBox);
-            groupBox1.Controls.Add(lastName_textbox);
-            groupBox1.Controls.Add(firstName_textbox);
-            groupBox1.Controls.Add(Position);
-            groupBox1.Controls.Add(lastName);
-            groupBox1.Controls.Add(firstName);
-            groupBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox1.Location = new Point(71, 83);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(315, 237);
-            groupBox1.TabIndex = 0;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Employee Data";
-            // 
-            // position_comboBox
-            // 
-            position_comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            position_comboBox.FormattingEnabled = true;
-            position_comboBox.Items.AddRange(new object[] { "Manager", "Senior Programmer", "Junior Programmer", "Tester" });
-            position_comboBox.Location = new Point(136, 149);
-            position_comboBox.Name = "position_comboBox";
-            position_comboBox.Size = new Size(148, 23);
-            position_comboBox.TabIndex = 5;
-            // 
-            // lastName_textbox
-            // 
-            lastName_textbox.Location = new Point(136, 94);
-            lastName_textbox.Name = "lastName_textbox";
-            lastName_textbox.Size = new Size(148, 23);
-            lastName_textbox.TabIndex = 4;
-            // 
-            // firstName_textbox
-            // 
-            firstName_textbox.Location = new Point(136, 51);
-            firstName_textbox.Name = "firstName_textbox";
-            firstName_textbox.Size = new Size(148, 23);
-            firstName_textbox.TabIndex = 3;
-            // 
-            // Position
-            // 
-            Position.AutoSize = true;
-            Position.Location = new Point(27, 152);
-            Position.Name = "Position";
-            Position.Size = new Size(53, 15);
-            Position.TabIndex = 2;
-            Position.Text = "Position";
-            // 
-            // lastName
-            // 
-            lastName.AutoSize = true;
-            lastName.Location = new Point(27, 97);
-            lastName.Name = "lastName";
-            lastName.Size = new Size(61, 15);
-            lastName.TabIndex = 1;
-            lastName.Text = "Last Name";
-            // 
-            // firstName
-            // 
-            firstName.AutoSize = true;
-            firstName.Location = new Point(27, 47);
-            firstName.Name = "firstName";
-            firstName.Size = new Size(61, 15);
-            firstName.TabIndex = 0;
-            firstName.Text = "First Name";
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(generatePassword_button);
-            groupBox2.Controls.Add(length_textBox);
-            groupBox2.Controls.Add(specialCharacters_checkBox);
-            groupBox2.Controls.Add(numbers_checkBox);
-            groupBox2.Controls.Add(letters_checkBox);
-            groupBox2.Controls.Add(charactersLabel);
-            groupBox2.Location = new Point(460, 83);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(297, 237);
-            groupBox2.TabIndex = 1;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Generate Password";
-            // 
-            // generatePassword_button
-            // 
-            generatePassword_button.BackColor = Color.SteelBlue;
-            generatePassword_button.ForeColor = Color.White;
-            generatePassword_button.Location = new Point(112, 184);
-            generatePassword_button.Name = "generatePassword_button";
-            generatePassword_button.Size = new Size(97, 23);
-            generatePassword_button.TabIndex = 5;
-            generatePassword_button.Text = "Generate Password";
-            generatePassword_button.UseVisualStyleBackColor = false;
-            generatePassword_button.Click += generatePassword_button_Click;
-            // 
-            // length_textBox
-            // 
-            length_textBox.Location = new Point(132, 33);
-            length_textBox.Name = "length_textBox";
-            length_textBox.Size = new Size(148, 23);
-            length_textBox.TabIndex = 4;
-            // 
-            // specialCharacters_checkBox
-            // 
-            specialCharacters_checkBox.AutoSize = true;
-            specialCharacters_checkBox.Location = new Point(48, 148);
-            specialCharacters_checkBox.Name = "specialCharacters_checkBox";
-            specialCharacters_checkBox.Size = new Size(117, 19);
-            specialCharacters_checkBox.TabIndex = 3;
-            specialCharacters_checkBox.Text = "Special Characters";
-            specialCharacters_checkBox.UseVisualStyleBackColor = true;
-            // 
-            // numbers_checkBox
-            // 
-            numbers_checkBox.AutoSize = true;
-            numbers_checkBox.Location = new Point(48, 111);
-            numbers_checkBox.Name = "numbers_checkBox";
-            numbers_checkBox.Size = new Size(68, 19);
-            numbers_checkBox.TabIndex = 2;
-            numbers_checkBox.Text = "Numbers";
-            numbers_checkBox.UseVisualStyleBackColor = true;
-            // 
-            // letters_checkBox
-            // 
-            letters_checkBox.AutoSize = true;
-            letters_checkBox.Checked = true;
-            letters_checkBox.CheckState = CheckState.Checked;
-            letters_checkBox.Location = new Point(48, 73);
-            letters_checkBox.Name = "letters_checkBox";
-            letters_checkBox.Size = new Size(90, 19);
-            letters_checkBox.TabIndex = 1;
-            letters_checkBox.Text = "Letters (upper & lower)";
-            letters_checkBox.UseVisualStyleBackColor = true;
-            // 
-            // charactersLabel
-            // 
-            charactersLabel.AutoSize = true;
-            charactersLabel.Location = new Point(48, 36);
-            charactersLabel.Name = "charactersLabel";
-            charactersLabel.Size = new Size(69, 15);
-            charactersLabel.TabIndex = 0;
-            charactersLabel.Text = "Number of characters?";
-            // 
-            // confirm_button
-            // 
-            confirm_button.BackColor = Color.SteelBlue;
-            confirm
+            password = "";
+            int length = Convert.ToInt32(length_textBox.Text);
+
+
+            if (uppercase_checkbox.Checked)
+            {
+                password += uppercase_letters[random.Next(0, uppercase_letters.Length)];
+            }
+            if (numbers_checkbox.Checked)
+            {
+                password += numbers[random.Next(0, numbers.Length)];
+            }
+            if (special_characters_checkbox.Checked)
+            {
+                password += special_characters[random.Next(0, special_characters.Length)];
+            }
+
+            while (password.Length < length)
+            {
+                password += lowercase_letters[random.Next(0, lowercase_letters.Length)];
+            }
+            MessageBox.Show(password);
+        }
+
+        private void confirm_button_Click(object sender, EventArgs e)
+        {
+            string firstName = firstName_textbox.Text;
+            string lastName = lastName_textbox.Text;
+            string position = position_comboBox.Text;
+
+            MessageBox.Show("Employee Data: " + firstName + " " + lastName + " " + position + " Password: " + password);
+        }
+    }
+}
